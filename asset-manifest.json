@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/graphnest/static/css/main.e6c13ad2.css",
+    "main.js": "/graphnest/static/js/main.2add10fd.js",
+    "static/js/453.fa526d46.chunk.js": "/graphnest/static/js/453.fa526d46.chunk.js",
+    "index.html": "/graphnest/index.html",
+    "main.e6c13ad2.css.map": "/graphnest/static/css/main.e6c13ad2.css.map",
+    "main.2add10fd.js.map": "/graphnest/static/js/main.2add10fd.js.map",
+    "453.fa526d46.chunk.js.map": "/graphnest/static/js/453.fa526d46.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.2add10fd.js"
+  ]
+}
