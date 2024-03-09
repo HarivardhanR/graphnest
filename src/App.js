@@ -1,33 +1,98 @@
-import React from 'react';
+import React, { useState } from 'react';
 import BarGraph from './components/BarGraph';
 import Title from './components/Title';
+import './components/form.css'
 
 function App() {
-  // Sample data
-  // const data = [93, 40, 60, 80, 10,20,30,30,40,43,3,2,32,20,32,32,32,32];
-  // const data = [4000,19001, 4000,40];
-  const data = [1,2,3];
-  const width = 500;
-  const height = 500;
-  const xAxisLabel = "X-axis Label";
-  const yAxisLabel = "Y-axis Label";
-  const barSpacing = 10;
-  const numYAxisDivisions = 4;
+  const [data, setData] = useState([1, 2, 3]);
+  const [width, setWidth] = useState(500);
+  const [height, setHeight] = useState(500);
+  const [xAxisLabel, setXAxisLabel] = useState("X-axis Label");
+  const [yAxisLabel, setYAxisLabel] = useState("Y-axis Label");
+  const [barSpacing, setBarSpacing] = useState(10);
+  const [numYAxisDivisions, setNumYAxisDivisions] = useState(4);
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    // You can perform any additional validation or processing here
+  };
 
   return (
-    <div className="App">
-      <h1>Bar Graph Example</h1>
-      <BarGraph
-        data={data}
-        width={width}
-        height={height}
-        xAxisLabel={xAxisLabel}
-        yAxisLabel={yAxisLabel}
-        barSpacing={barSpacing}
-        numYAxisDivisions={numYAxisDivisions}
-      >
-        <Title value="Sample Data" fill="black" style={{}}/>
-      </BarGraph>
+    <div className="app-container">
+      <div className="graph-container">
+        <BarGraph
+          data={data}
+          width={width}
+          height={height}
+          xAxisLabel={xAxisLabel}
+          yAxisLabel={yAxisLabel}
+          barSpacing={barSpacing}
+          numYAxisDivisions={numYAxisDivisions}
+        >
+          <Title value="Sample Data" fill="black" style={{}} />
+        </BarGraph>
+      </div>
+      <div className="form-container">
+        <h1>Bar Graph Example</h1>
+        <form onSubmit={handleFormSubmit}>
+          <div className="form-group">
+            <label>Data:</label>
+            <input
+              type="text"
+              value={data.join(',')}
+              onChange={(e) => setData(e.target.value.split(',').map(Number))}
+            />
+          </div>
+          <div className="form-group">
+            <label>Width:</label>
+            <input
+              type="number"
+              value={width}
+              onChange={(e) => setWidth(Number(e.target.value))}
+            />
+          </div>
+          <div className="form-group">
+            <label>Height:</label>
+            <input
+              type="number"
+              value={height}
+              onChange={(e) => setHeight(Number(e.target.value))}
+            />
+          </div>
+          <div className="form-group">
+            <label>X-axis Label:</label>
+            <input
+              type="text"
+              value={xAxisLabel}
+              onChange={(e) => setXAxisLabel(e.target.value)}
+            />
+          </div>
+          <div className="form-group">
+            <label>Y-axis Label:</label>
+            <input
+              type="text"
+              value={yAxisLabel}
+              onChange={(e) => setYAxisLabel(e.target.value)}
+            />
+          </div>
+          <div className="form-group">
+            <label>Bar Spacing:</label>
+            <input
+              type="number"
+              value={barSpacing}
+              onChange={(e) => setBarSpacing(Number(e.target.value))}
+            />
+          </div>
+          <div className="form-group">
+            <label>Number of Y-axis Divisions:</label>
+            <input
+              type="number"
+              value={numYAxisDivisions}
+              onChange={(e) => setNumYAxisDivisions(Number(e.target.value))}
+            />
+          </div>
+        </form>
+      </div>
     </div>
   );
 }
