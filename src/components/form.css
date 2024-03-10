@@ -13,7 +13,10 @@
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    height: 700px; /* Set a fixed height */
+    overflow-y: auto; /* Apply scrollbar only if content overflows */
   }
+  
   
   .form-group {
     margin-bottom: 10px;

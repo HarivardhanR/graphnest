@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import BarGraph from './components/BarGraph';
 import Title from './components/Title';
 import './components/form.css';
+import XAxisLabel from './components/xAxisLabel';
+import YAxisLabel from './components/yAxisLabel';
+import XAxis from './components/xAxis';
+import YAxis from './components/yAxis';
 
 function App() {
   const [data, setData] = useState([
@@ -81,7 +85,7 @@ function App() {
   const [xTickLabelAwayPadding, setXTickLabelAwayPadding] = useState(30);
   const [yTickLabelAwayPadding, setYTickLabelAwayPadding] = useState(20);
   const [xAxisLabelAwayPadding, setXAxisLabelAwayPadding] = useState(0);
-  const [yAxisLabelAwayPadding, setYAxisLabelAwayPadding] = useState(-20);
+  const [yAxisLabelAwayPadding, setYAxisLabelAwayPadding] = useState(-16);
   const [xAxisRotateAngle, setXAxisRotateAngle] = useState(0);
   const [titleValue, setTitleValue] = useState("Sample Data");
   const [titleFill, setTitleFill] = useState("black");
@@ -105,19 +109,15 @@ function App() {
           data={data}
           width={width}
           height={height}
-          xAxisLabel={xAxisLabel}
-          yAxisLabel={yAxisLabel}
           barSpacing={barSpacing}
-          numYAxisDivisions={numYAxisDivisions}
-          xTickLabelAwayPadding={xTickLabelAwayPadding}
-          yTickLabelAwayPadding={yTickLabelAwayPadding}
-          xAxisLabelAwayPadding={xAxisLabelAwayPadding}
-          yAxisLabelAwayPadding={yAxisLabelAwayPadding}
           minBarWidth={minBarWidth}
-          xAxisRotateAngle={xAxisRotateAngle}
           paddingProp={paddingProp}
         >
           <Title value={titleValue} fill={titleFill} style={{}} centerOf={titleCenterOf} />
+          <XAxisLabel value={xAxisLabel} xAxisLabelAwayPadding={xAxisLabelAwayPadding}/>
+          <YAxisLabel value={yAxisLabel} yAxisLabelAwayPadding={yAxisLabelAwayPadding}/>
+          <XAxis xAxisRotateAngle= {xAxisRotateAngle} xTickLabelAwayPadding={xTickLabelAwayPadding}/>
+          <YAxis yTickLabelAwayPadding={yTickLabelAwayPadding} numYAxisDivisions={numYAxisDivisions}/>
         </BarGraph>
       </div>
       <div className="form-container">
