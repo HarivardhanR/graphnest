@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import BarGraph from './components/BarGraph';
-import Title from './components/Title';
-import './components/form.css';
-import XAxisLabel from './components/xAxisLabel';
-import YAxisLabel from './components/yAxisLabel';
-import XAxis from './components/xAxis';
-import YAxis from './components/yAxis';
+import BarGraph from '../src/components/BarGraph';
+import Title from '../src/components/Title';
+import '../src/components/form.css';
+import XAxisLabel from '../src/components/xAxisLabel';
+import YAxisLabel from '../src/components/yAxisLabel';
+import XAxis from '../src/components/xAxis';
+import YAxis from '../src/components/yAxis';
 
 function App() {
   const [data, setData] = useState([
