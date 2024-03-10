@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Title = ({ x, y, textAnchor, fill, fontWeight, value, style }) => {
+const Title = ({ x, y, centerOf, textAnchor, fill, fontWeight, value, style }) => {
   return (
     <text
       x={x}
@@ -18,6 +18,7 @@ const Title = ({ x, y, textAnchor, fill, fontWeight, value, style }) => {
 };
 
 Title.defaultProps = {
+  centerOf: "Xaxis",
   textAnchor: "middle",
   fill: "black",
   fontWeight: "bold",

@@ -8,29 +8,51 @@ const BarGraph = ({
   yAxisLabel,
   barSpacing,
   numYAxisDivisions,
+  xTickLabelAwayPadding,
+  yTickLabelAwayPadding,
+  xAxisLabelAwayPadding,
+  yAxisLabelAwayPadding,
+  xAxisRotateAngle,
+  minBarWidth,
+  paddingProp={},
   children
 }) => {
-  // Adjust padding for labels and space
-  const labelPadding = 20;
-  const padding = {
+  // Default padding values
+  const defaultPadding = {
     top: 50,
     bottom: 60,
     left: 70,
-    right: 0
+    right: 10
   };
+
+  // Merge the provided padding object with the default padding object
+  const padding = {
+    top: defaultPadding.top + (paddingProp.top || 0),
+    bottom: defaultPadding.bottom + (paddingProp.bottom || 0),
+    left: defaultPadding.left + (paddingProp.left || 0),
+    right: defaultPadding.right + (paddingProp.right || 0)
+  };
+
+  let svgWidth = width;
 
   // Adjust width and height to accommodate labels and space
   const adjustedWidth = width - padding.left - padding.right;
   const adjustedHeight = height - padding.top - padding.bottom;
+  const max = Math.max(...data.map(item => item.yVal));
+  let barWidth = (adjustedWidth - (data.length - 1) * barSpacing) / data.length;
+  const maxValue = Math.ceil(max / 1000) * 1000;
+
+  if (barWidth < minBarWidth) {
+    svgWidth = width + (minBarWidth- barWidth) * data.length;
+    barWidth = minBarWidth;
+  }
 
   const renderBars = () => {
-    const max = Math.max(...data);
-    const barWidth = (adjustedWidth - (data.length - 1) * barSpacing) / data.length;
-    const maxValue = Math.ceil(max / 10) * 10;
 
-    return data.map((value, index) => {
+
+    return data.map((item, index) => {
       const xPos = index * (barWidth + barSpacing) + padding.left;
-      const barHeight = (value / maxValue) * adjustedHeight;
+      const barHeight = (item.yVal / maxValue) * adjustedHeight;
       const yPos = height - barHeight - padding.bottom;
 
       return (
@@ -49,8 +71,7 @@ const BarGraph = ({
 
 
   const renderYAxis = () => {
-    const max = Math.max(...data);
-    const maxValue = Math.ceil(max / 10) * 10;
+
     const yStep = maxValue / numYAxisDivisions;
 
     const yAxisLabels = Array.from(
@@ -61,7 +82,7 @@ const BarGraph = ({
     const yAxisTicks = yAxisLabels.map((label, index) => (
       <g key={index}>
         <text
-          x={padding.left - labelPadding / 2}
+          x={padding.left - yTickLabelAwayPadding / 2}
           y={height - padding.bottom - index * (adjustedHeight / numYAxisDivisions)+5}
           textAnchor="end"
           fill="black"
@@ -97,19 +118,19 @@ const BarGraph = ({
 
   
   const renderXAxis = () => {
-    const xAxisTicks = data.map((_, index) => {
-      const barWidth = (adjustedWidth - (data.length - 1) * barSpacing) / data.length;
+    const xAxisTicks = data.map((item, index) => {
       const xPos = index * (barWidth + barSpacing) + padding.left + barWidth / 2;
 
       return (
         <g key={index}>
           <text
             x={xPos}
-            y={height - padding.bottom + labelPadding}
+            y={height - padding.bottom + xTickLabelAwayPadding}
             textAnchor="middle"
             fill="black"
+            transform={`rotate(${xAxisRotateAngle} ${xPos},${height - padding.bottom + xTickLabelAwayPadding})`}
           >
-            {index + 1}
+            {item.xVal}
           </text>
           <line
             x1={xPos}
@@ -129,7 +150,7 @@ const BarGraph = ({
         <line
           x1={padding.left}
           y1={height - padding.bottom}
-          x2={width - padding.right}
+          x2={svgWidth - padding.right}
           y2={height - padding.bottom}
           stroke="black"
           strokeWidth="1"
@@ -141,14 +162,16 @@ const BarGraph = ({
 
   
   return (
-    <svg width={width} height={height}>
+    <div style={{ overflowX: 'auto', width: '500px',border: '2px solid black'}}>
+    <svg width={svgWidth} height={height}>
       {React.Children.map(children, child =>
         React.isValidElement(child) && child.type.name === "Title" ? 
           React.cloneElement(child, {
-            x: (width -padding.left -padding.right)/ 2 + padding.left,
+            x: child.props.centerOf === "graph" ? width / 2 : (width - padding.left - padding.right) / 2 + padding.left ,
             y: 30,
           }) : null
       )}
+
       {renderBars()}
       <g>
         {renderXAxis()}
@@ -156,7 +179,7 @@ const BarGraph = ({
       </g>
       <text
         x={(width - padding.left - padding.right) / 2 + padding.left}
-        y={height-10}
+        y={height+xAxisLabelAwayPadding}
         textAnchor="middle"
         fill="black"
       >
@@ -164,7 +187,7 @@ const BarGraph = ({
       </text>
       <text
         x={-((height - padding.top - padding.bottom ) / 2 + padding.top)}
-        y={0+20}
+        y={0-yAxisLabelAwayPadding}
         // x={10}
         // y={((height - padding.top - padding.bottom ) / 2 + padding.top)+5}
         textAnchor="middle"
@@ -174,6 +197,7 @@ const BarGraph = ({
         {yAxisLabel}
       </text>
     </svg>
+    </div>
   );
 };
 
