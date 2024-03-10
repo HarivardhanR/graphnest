@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/graphnest/static/css/main.d585d0c9.css",
-    "main.js": "/graphnest/static/js/main.d0a81a49.js",
+    "main.css": "/graphnest/static/css/main.6c0b46e5.css",
+    "main.js": "/graphnest/static/js/main.9b28b1b7.js",
     "static/js/453.fa526d46.chunk.js": "/graphnest/static/js/453.fa526d46.chunk.js",
     "index.html": "/graphnest/index.html",
-    "main.d585d0c9.css.map": "/graphnest/static/css/main.d585d0c9.css.map",
-    "main.d0a81a49.js.map": "/graphnest/static/js/main.d0a81a49.js.map",
+    "main.6c0b46e5.css.map": "/graphnest/static/css/main.6c0b46e5.css.map",
+    "main.9b28b1b7.js.map": "/graphnest/static/js/main.9b28b1b7.js.map",
     "453.fa526d46.chunk.js.map": "/graphnest/static/js/453.fa526d46.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.d585d0c9.css",
-    "static/js/main.d0a81a49.js"
+    "static/css/main.6c0b46e5.css",
+    "static/js/main.9b28b1b7.js"
   ]
 }
