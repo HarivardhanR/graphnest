@@ -9,7 +9,7 @@ const BarGraph = ({
   paddingProp={},
   children
 }) => {
-  // Default padding values
+
   const defaultPadding = {
     top: 50,
     bottom: 60,
