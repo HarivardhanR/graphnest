@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import BarGraph from './components/BarGraph';
 import Title from './components/Title';
 import './components/form.css';
-import XAxisLabel from './components/xAxisLabel';
-import YAxisLabel from './components/yAxisLabel';
-import XAxis from './components/xAxis';
-import YAxis from './components/yAxis';
+import XAxisLabel from './components/XAxisLabel';
+import YAxisLabel from './components/YAxisLabel';
+import XAxis from './components/XAxis';
+import YAxis from './components/YAxis';
 
 function App() {
   const [data, setData] = useState([

@@ -1,10 +1,23 @@
-import React from 'react';
+import React, { useContext } from "react";
+import BarGraphContext from "./BarGraphContext";
 
-const XAxisLabel = ({ x, y,xAxisLabelAwayPadding,fill,fontSize, fontWeight,textAnchor, value, style }) => {
+const XAxisLabel = ({
+  x,
+  y,
+  xAxisLabelAwayPadding,
+  fill,
+  fontSize,
+  fontWeight,
+  textAnchor,
+  value,
+  style,
+}) => {
+  console.log("Rendering:XAxisLabel");
+  const { width, height, padding } = useContext(BarGraphContext);
   return (
     <text
-      x={x}
-      y={y+xAxisLabelAwayPadding}
+      x={(width - padding.left - padding.right) / 2 + padding.left}
+      y={height + xAxisLabelAwayPadding}
       fill={fill}
       fontWeight={fontWeight}
       fontSize={fontSize}
@@ -21,7 +34,7 @@ XAxisLabel.defaultProps = {
   textAnchor: "middle",
   fill: "black",
   fontWeight: "bold",
-  fontSize:16,
+  fontSize: 16,
   style: {},
 };
 
